@@ -1,0 +1,6 @@
+[submodule "fortran"]
+	path = fortran
+	url = https://github.com/q3uxlyn/algorithms_data_structures
+[submodule "cpp"]
+	path = cpp
+	url = https://github.com/q3uxlyn/programming_technologies.git
