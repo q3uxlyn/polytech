@@ -1,0 +1,12 @@
+\babel@toc {russian}{}\relax 
+\ttl@change@i {\@ne }{section}{0pt}{\vspace {0.5ex}\hspace {1em}}{}{}{\titlerule *[1pc]{.}\contentspage }\relax 
+\ttl@change@v {section}{}{}{}\relax 
+\contentsline {section}{\numberline {1}Введение}{3}{}%
+\contentsline {paragraph}{Задание \newline }{3}{}%
+\contentsline {section}{\numberline {2}Блок-схема}{4}{}%
+\contentsline {paragraph}{Структура програмы \newline \newline }{4}{}%
+\contentsline {paragraph}{Алгоритм сортировки \newline \newline }{5}{}%
+\contentsline {section}{\numberline {3}Список использованных прерываний BIOS}{6}{}%
+\contentsline {section}{\numberline {4}Листинг кода}{7}{}%
+\contentsline {section}{\numberline {5}Пример выполнения программы}{12}{}%
+\contentsfinish 
