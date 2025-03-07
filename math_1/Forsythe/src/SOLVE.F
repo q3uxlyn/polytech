@@ -3,27 +3,27 @@ C
       INTEGER NDIM,N,IPVT(N)
       REAL A(NDIM,N),B(N)
 C
-C     PE�EH�E ��HE�HO� C�CTEM� A*X=B
-C     �O��PO�PAMMY HE C�E�YET �C�O���OBAT�,
-C     EC�� DECOMP O�HAPY��� B�PO��EHHOCT�
+C     РЕШЕНИЕ ЛИНЕЙНОЙ СИСТЕМЫ A*X=B
+C     ЭТУ ПРОГРАММУ НЕ СЛЕДУЕТ ИСПОЛЬЗОВАТЬ,
+C     ЕСЛИ DECOMP ОБНАРУЖИЛ ВЫРОЖДЕННОСТЬ
 C
-C     BXO�HA� �H�OPMA���.
+C     ВХОДНАЯ ИНФОРМАЦИЯ.
 C
-C     NDIM -�A�B�EHHA� CTPO�HA� PA�MEPHOCT�
-C           MACC�BA,CO�EP�A�E�O A.
-C     N    -�OP��OK MATP���.
-C     A    -�AKTOP��OBAHHA� MATP��A,�O�Y�EHHA� �� DECOMP
-C     B    -BEKTOP �PAB�X �ACTE�.
-C     IPVT -BEKTOP BE�Y��X ��EMEHTOB,�O�Y�EHH�� �� DECOMP
+C     NDIM - ДАВЛЕННАЯ СТРОЧНАЯ РАЗМЕРНОСТЬ
+C           МАССИВА, СОДЕРЖАЩЕГО A.
+C     N    - ПОРЯДОК МАТРИЦЫ.
+C     A    - ФАКТОРИЗОВАННАЯ МАТРИЦА, ПОЛУЧЕННАЯ В DECOMP
+C     B    - ВЕКТОР ПРАВЫХ ЧАСТЕЙ.
+C     IPVT - ВЕКТОР ВЕДУЩИХ ЭЛЕМЕНТОВ, ПОЛУЧЕННЫЙ В DECOMP
 C
-C     B�XO�HA� �H�OPMA���.
+C     ВЫХОДНАЯ ИНФОРМАЦИЯ.
 C
-C     B    =BEKTOP PE�EH�� X.
+C     B    = ВЕКТОР РЕШЕНИЯ X.
 C
       INTEGER KB,KM1,NM1,KP1,I,K,M
       REAL T
 C
-C     �P�MO� XO�
+C     ПРЯМОЙ ХОД
 C
       IF(N.EQ.1) GO TO 50
       NM1=N-1
@@ -38,7 +38,7 @@ C
    10   CONTINUE
    20 CONTINUE
 C
-C     O�PATHA� �O�CTAHOBKA
+C     ОБРАТНАЯ ПОДСТАНОВКА
 C
       DO 40 KB=1,NM1
         KM1=N-KB
