@@ -1,52 +1,79 @@
-program matrix_norm
-    use matrix_ops  ! Подключаем модуль с подпрограммами decomp и solve
+program main
+    use matrix_ops
     implicit none
-    integer, parameter :: n = 5
-    real(8) :: A(n,n), A_inv(n,n), B(n-1), R(n,n)
-    real(8) :: a4_values(4) = [1.5d0, 1.01d0, 1.001d0, 1.0001d0]
-    integer :: i, j, k, NPIV(n)
-    real(8) :: D, normR, cond, work(n)
-
+    integer, parameter :: n = 5, ndim = n
+    real :: A(ndim, n), A_inv(ndim, n), B(n-1), cond, work(n)
+    integer :: ipvt(n), i, j
+    real :: R(ndim, n), I(ndim, n), normR
+    real, dimension(4) :: var_values = [1.5, 1.01, 1.001, 1.0001]
+    integer :: k
+    
+    ! Задание вектора B
+    B = [4.0, 3.0, 2.0, 0.0] ! Последний элемент заменяется на var позже
+    
     do k = 1, 4
-        ! Задаем вектор B
-        B = [4.0d0, 3.0d0, 2.0d0, a4_values(k)]
-
-        ! Формируем матрицу A
+        B(4) = var_values(k) ! Устанавливаем текущее значение var
+        print *, "------------------------------"
+        print *, "For var =", B(4)
+        
+        ! Формирование матрицы A
         do i = 1, n
             do j = 1, n
-                if (j == 1) then
-                    A(i,j) = 1.0d0
-                elseif (i < j) then
-                    A(i,j) = B(i)
+                if (j < i) then
+                    A(i, j) = 1.0
+                else if (j > i) then
+                    A(i, j) = B(j-1)
                 else
-                    A(i,j) = 1.0d0
+                    A(i, j) = 1.0
                 end if
             end do
         end do
-
-        ! Копируем A в A_inv перед разложением
+        
+        print *, "Matrix A:"
+        do i = 1, n
+            print *, A(i, :)
+        end do
+        
+        ! Копируем A в A_inv для получения A^(-1)
         A_inv = A
-
-        ! Выполняем LU-разложение
-        call decomp(n, n, A_inv, cond, NPIV, work)
-
-        ! Находим A^-1, решая AX = I
+        
+        ! Вычисление A^(-1)
+        call decomp(ndim, n, A_inv, cond, ipvt, work)
         do i = 1, n
-            ! Единичная матрица в виде столбца
-            R = 0.0d0
-            R(i,i) = 1.0d0
-            call solve(n, n, A_inv, R(:,i), NPIV)
+            work = 0.0
+            work(i) = 1.0
+            call solve(ndim, n, A_inv, work, ipvt)
+            A_inv(:, i) = work
         end do
-
-        ! Вычисляем R = AA⁻¹ - I
+        
+        print *, "Inverse Matrix A_inv:"
+        do i = 1, n
+            print *, A_inv(i, :)
+        end do
+        
+        ! Вычисление R = AA^(-1) - E
         R = matmul(A, A_inv)
+        I = 0.0
         do i = 1, n
-            R(i,i) = R(i,i) - 1.0d0
+            I(i, i) = 1.0
         end do
-
-        ! Вычисляем норму матрицы R (по максимальной сумме строк)
-        normR = maxval(sum(abs(R), dim=2))
-
-        print *, "Для a4 =", B(n-1), "норма R =", normR
+        R = R - I
+        
+        print *, "Matrix R = AA^(-1) - I:"
+        do i = 1, n
+            print *, R(i, :)
+        end do
+        
+        ! Вычисление нормы матрицы R
+        normR = 0.0
+        do i = 1, n
+            do j = 1, n
+                normR = normR + abs(R(i, j))
+            end do
+        end do
+        
+        ! Вывод результатов
+        print *, "Norm of R:", normR
     end do
-end program matrix_norm
+    
+end program main
