@@ -1,0 +1,142 @@
+\documentclass[a4paper,14pt]{article}
+
+% Поддержка русского языка
+\usepackage[T1, T2A]{fontenc}    % Кодировка
+\usepackage[utf8]{inputenc}  % Кодировка исходного текста
+\usepackage[english, russian]{babel}  % Локализация и переносы
+\usepackage{titlesec, titletoc} % Для настройки стилей заголовков и содержания
+\usepackage{booktabs} % Для использования \toprule, \midrule и \bottomrule
+\usepackage{array}  % Для лучшего контроля столбцов
+\usepackage{cmap}    % Поиск и копирование в PDF
+\usepackage{geometry}    % Поля
+    \geometry{left=30mm, right=15mm, top=20mm, bottom=20mm}
+\usepackage{hhline} % Для двойных линий и более точного контроля границ
+\usepackage{caption} % Для настройки подписей
+\usepackage{verbatim}
+\usepackage{xcolor} % Пакет для цвета
+\usepackage{listings} % Пакет для вставки кода
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3.5cm, minimum height=1cm, text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3.5cm, minimum height=1cm, text centered, draw=black, fill=blue!20]
+\tikzstyle{decision} = [diamond, minimum width=3.5cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+% \usepackage{times}
+
+% Установка стандартного отступа (2em)
+\setlength{\parindent}{2em}
+
+% Установка отступа после заголовков
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{2\baselineskip}{\baselineskip}
+\titlespacing*{\subsection}{0pt}{2\baselineskip}{\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{2\baselineskip}{\baselineskip}
+
+% Определение цветов
+% \definecolor{operatorcolor}{HTML}{ED028C}
+% \definecolor{stringcolor}{HTML}{9400D1}
+% \definecolor{commentcolor}{HTML}{005000}
+% \definecolor{backgroundcolor}{HTML}{fafafa}
+\definecolor{backgroundcolor}{HTML}{fafafa} % Темный фон
+\definecolor{keywordcolor}{rgb}{0.86, 0.58, 0.35} % Ключевые слова (оранжевый)
+\definecolor{stringcolor}{rgb}{0.72, 0.92, 0.53} % Строки (зеленый)
+\definecolor{commentcolor}{HTML}{005000} % Комментарии (серый)
+\definecolor{numbercolor}{rgb}{0.75, 0.75, 0.75} % Номера строк (светло-серый)
+\definecolor{identifiercolor}{rgb}{0.60, 0.60, 1.00} % Идентификаторы (светло-синий)
+\definecolor{keywordtypcolor}{rgb}{0.57, 0.81, 1.00} % Типы данных (голубой)
+
+\captionsetup[table]{justification=raggedright, singlelinecheck=false} % Выравнивание подписи по левому краю
+
+% Установка стиля заголовков разделов: центрирование без номера
+\titleformat{\section}[block]{\Large\bfseries\centering}{}{0pt}{}
+
+\title{3.1 Титульный лист}
+
+\begin{document}
+
+\thispagestyle{empty}    % Отключаем колонтитулы
+
+\begin{center}
+    ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ\\
+    \bfseries{САНКТ-ПЕТЕРБУРГСКИЙ ПОЛИТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ ПЕТРА ВЕЛИКОГО}\\
+    Институт компьютерных наук и кибербезопасности\\
+    Высшая школа программной инженерии
+\end{center}
+
+\vspace{20ex} % Задаем размер вертикального промежутка в явном виде
+
+\begin{center}
+    \begin{huge} {\bfseries{\scshape лабораторная работа №2}} \end{huge}
+
+    \vspace{3ex}
+    по дисциплине: «Вычислительная матиматика»\\
+    Вариант №27
+\end{center}
+
+\vspace{30ex}
+
+\noindent Выполнила\\
+студентка гр. в5130904/30022\hfill \begin{minipage}{0.6\textwidth} \hfill Г.М.Феллер\end{minipage}
+
+\vspace{3ex}
+
+\noindent Преподаватель \hfill \begin{minipage} {0.6\textwidth}\hfill С.П.Воскобойников\end{minipage}
+
+\vspace{3ex}
+
+\hfill \begin{minipage}{0.6\textwidth} \hfill «\underline{\hspace{1cm}}»\underline{\hspace{3cm}} 2025 г.\end{minipage}
+
+\vfill
+
+\begin{center}
+    Санкт-Петербург\\ 
+    2025
+\end{center}
+
+\newpage % Начинаем новую страницу\
+
+% Отключение нумерации разделов в заголовках разделов и подразделов
+\titleformat{\section}[block]{\Large\bfseries\centering}{}{0pt}{}
+
+% Настройка заголовков подразделов с использованием символа "§" и собственной нумерации
+\renewcommand{\thesubsection}{\S\arabic{subsection}}
+\titleformat{\subsection}[block]{\large\bfseries}{\thesubsection}{1em}{}
+% Установка автоматического сброса счетчика подразделов при начале нового раздела
+
+% Определение стиля оглавления
+\titlecontents{section}[0pt] % Left indent
+{\vspace{0.5ex}\hspace{1em}} % Above code and left spacing
+{} % Numbered entry format (empty to remove numbers)
+{} % Numberless entry format
+{\titlerule*[1pc]{.}\contentspage} % Filler-page format
+
+\newpage
+
+\section{Задание}
+
+Написать процедуру формирования матрицы $A$ по заданному вектору $B$
+$$
+pA = \begin{pmatrix}
+        1     & a_1   & a_1   & \dots & a_1     \\
+        1     & 1     & a_2   & \dots & a_2     \\
+        \dots & \dots & \dots & \dots & \dots   \\
+        1     & 1     & 1     & \dots & a_{n-1} \\
+        1     & 1     & 1     & \dots & 1
+    \end{pmatrix},
+B = \begin{pmatrix}
+        a_1 & a_2 & \dots & a_{n-1} \\
+    \end{pmatrix}^T
+$$
+
+Задавая $n = 5, a_1 = 4, a_2 = 3, a_3 = 2, a_4 = var = 1.5; 1.01; 1.001; 1.0001$ и вычисляя $A^{-1}$ с помощью DECOMP и SOLVE, найти нормы матриц $R = AA^{-1} - E$ для всех вариантов $a_4$.
+
+
+
+\end{document}
