@@ -4,7 +4,7 @@ program main
     integer, parameter :: n = 5, ndim = n
     real :: A(ndim, n), A_inv(ndim, n), B(n-1), cond, work(n)
     integer :: ipvt(n), i, j
-    real :: R(ndim, n), I(ndim, n), normR
+    real :: R(ndim, n), Identity(ndim, n), normR
     real, dimension(4) :: var_values = [1.5, 1.01, 1.001, 1.0001]
     integer :: k
     
@@ -31,7 +31,7 @@ program main
         
         print *, "Matrix A:"
         do i = 1, n
-            print *, A(i, :)
+            print *, (A(i, j), j=1, n)
         end do
         
         ! Копируем A в A_inv для получения A^(-1)
@@ -48,27 +48,27 @@ program main
         
         print *, "Inverse Matrix A_inv:"
         do i = 1, n
-            print *, A_inv(i, :)
+            print *, (A_inv(i, j), j=1, n)
         end do
         
         ! Вычисление R = AA^(-1) - E
         R = matmul(A, A_inv)
-        I = 0.0
+        Identity = 0.0
         do i = 1, n
-            I(i, i) = 1.0
+            Identity(i, i) = 1.0
         end do
-        R = R - I
+        R = R - Identity
         
         print *, "Matrix R = AA^(-1) - I:"
         do i = 1, n
-            print *, R(i, :)
+            print *, (R(i, j), j=1, n)
         end do
         
         ! Вычисление нормы матрицы R
         normR = 0.0
         do i = 1, n
             do j = 1, n
-                normR = normR + abs(R(i, j))
+                normR = normR + ABS(R(i, j))
             end do
         end do
         
