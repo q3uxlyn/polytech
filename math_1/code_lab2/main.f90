@@ -1,6 +1,7 @@
 program main
     use matrix_ops
     implicit none
+    ! Определение размеров матрицы
     integer, parameter :: n = 5, ndim = n
     real :: A(ndim, n), A_inv(ndim, n), B(n-1), cond, work(n)
     integer :: ipvt(n), i, j
@@ -20,8 +21,10 @@ program main
         do i = 1, n
             do j = 1, n
                 if (j < i) then
+                    ! Элементы ниже главной диагонали равны 1
                     A(i, j) = 1.0
                 else if (j > i) then
+                    ! Элементы выше главной диагонали равны B
                     A(i, j) = B(j-1)
                 else
                     A(i, j) = 1.0
@@ -37,12 +40,13 @@ program main
         ! Копируем A в A_inv для получения A^(-1)
         A_inv = A
         
-        ! Вычисление A^(-1)
+        ! Разложение A и нахождение A^(-1)
         call decomp(ndim, n, A_inv, cond, ipvt, work)
         do i = 1, n
             work = 0.0
             work(i) = 1.0
             call solve(ndim, n, A_inv, work, ipvt)
+            ! Формируем столбцы обратной матрицы
             A_inv(:, i) = work
         end do
         
@@ -52,11 +56,14 @@ program main
         end do
         
         ! Вычисление R = AA^(-1) - E
+        ! Умножаем A на A^(-1)
         R = matmul(A, A_inv)
+        ! Формирование единичной матрицы I
         Identity = 0.0
         do i = 1, n
             Identity(i, i) = 1.0
         end do
+        ! Вычисляем отклонение от единичной матрицы
         R = R - Identity
         
         print *, "Matrix R = AA^(-1) - I:"
@@ -68,6 +75,7 @@ program main
         normR = 0.0
         do i = 1, n
             do j = 1, n
+                ! Суммируем абсолютные значения элементов
                 normR = normR + ABS(R(i, j))
             end do
         end do
