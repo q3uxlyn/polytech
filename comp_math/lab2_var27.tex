@@ -224,93 +224,276 @@ $$
 \section{Код программы}
 
 \begin{lstlisting}
-    program main
-    use matrix_ops
+    program FormAndInvert
     implicit none
-    ! Определение размеров матрицы
-    integer, parameter :: n = 5, ndim = n
-    real :: A(ndim, n), A_inv(ndim, n), B(n-1), cond, work(n)
-    integer :: ipvt(n), i, j
-    real :: R(ndim, n), Identity(ndim, n), normR
-    real, dimension(4) :: var_values = [1.5, 1.01, 1.001, 1.0001]
-    integer :: k
-    
-    ! Задание вектора B
-    B = [4.0, 3.0, 2.0, 0.0] ! Последний элемент заменяется на var позже
-    
-    do k = 1, 4
-        B(4) = var_values(k) ! Устанавливаем текущее значение var
-        print *, "------------------------------"
-        print *, "For var =", B(4)
-        
-        ! Формирование матрицы A
-        do i = 1, n
-            do j = 1, n
-                if (j < i) then
-                    ! Элементы ниже главной диагонали равны 1
-                    A(i, j) = 1.0
-                else if (j > i) then
-                    ! Элементы выше главной диагонали равны B
-                    A(i, j) = B(j-1)
-                else
-                    A(i, j) = 1.0
-                end if
-            end do
-        end do
-        
-        print *, "Matrix A:"
-        do i = 1, n
-            print *, (A(i, j), j=1, n)
-        end do
-        
-        ! Копируем A в A_inv для получения A^(-1)
-        A_inv = A
-        
-        ! Разложение A и нахождение A^(-1)
-        call decomp(ndim, n, A_inv, cond, ipvt, work)
-        do i = 1, n
-            work = 0.0
-            work(i) = 1.0
-            call solve(ndim, n, A_inv, work, ipvt)
-            ! Формируем столбцы обратной матрицы
-            A_inv(:, i) = work
-        end do
-        
-        print *, "Inverse Matrix A_inv:"
-        do i = 1, n
-            print *, (A_inv(i, j), j=1, n)
-        end do
-        
-        ! Вычисление R = AA^(-1) - E
-        ! Умножаем A на A^(-1)
-        R = matmul(A, A_inv)
-        ! Формирование единичной матрицы I
-        Identity = 0.0
-        do i = 1, n
-            Identity(i, i) = 1.0
-        end do
-        ! Вычисляем отклонение от единичной матрицы
-        R = R - Identity
-        
-        print *, "Matrix R = AA^(-1) - I:"
-        do i = 1, n
-            print *, (R(i, j), j=1, n)
-        end do
-        
-        ! Вычисление нормы матрицы R
-        normR = 0.0
-        do i = 1, n
-            do j = 1, n
-                ! Суммируем абсолютные значения элементов
-                normR = normR + ABS(R(i, j))
-            end do
-        end do
-        
-        ! Вывод результатов
-        print *, "Norm of R:", normR
+    integer, parameter :: N = 5
+    integer :: i, j, k, variant
+    real :: A(N,N), A_copy(N,N), AINV(N,N), R(N,N)
+    real :: B(N-1), bvec(N)
+    real :: cond, work(N)
+    integer :: ipvt(N)
+    real :: normR, rowSum
+    real :: a1, a2, a3, a4
+    real, dimension(4) :: a4_values
+  
+    data a4_values / 1.5, 1.01, 1.001, 1.0001 /
+    a1 = 4.0
+    a2 = 3.0
+    a3 = 2.0
+  
+    do variant = 1, 4
+  
+       a4 = a4_values(variant)
+       B(1) = a1
+       B(2) = a2
+       B(3) = a3
+       B(4) = a4
+  
+       A(1,1) = 1.0
+       do j = 2, N
+          A(1,j) = a1
+       end do
+  
+       A(2,1) = 1.0
+       A(2,2) = 1.0
+       do j = 3, N
+          A(2,j) = a2
+       end do
+  
+       A(3,1) = 1.0
+       A(3,2) = 1.0
+       A(3,3) = 1.0
+       do j = 4, N
+          A(3,j) = a3
+       end do
+  
+       A(4,1) = 1.0
+       A(4,2) = 1.0
+       A(4,3) = 1.0
+       A(4,4) = 1.0
+       A(4,5) = a4
+  
+       do j = 1, N
+          A(5,j) = 1.0
+       end do
+  
+       do i = 1, N
+          do j = 1, N
+             A_copy(i,j) = A(i,j)
+          end do
+       end do
+  
+       ! Печать матрицы A
+       write(*,'(A, F10.6)') 'For var = ', a4
+       write(*,'(A)') 'Matrix A:'
+       do i = 1, N
+          write(*,'(5F12.4)') (A(i,j), j=1,N)
+       end do
+  
+       call DECOMP(N, N, A_copy, cond, ipvt, work)
+  
+       ! Вычисляем обратную матрицу AINV
+       do k = 1, N
+          do i = 1, N
+             if (i == k) then
+                bvec(i) = 1.0
+             else
+                bvec(i) = 0.0
+             end if
+          end do
+          call SOLVE(N, N, A_copy, bvec, ipvt)
+          do i = 1, N
+             AINV(i,k) = bvec(i)
+          end do
+       end do
+  
+       ! Печать обратной матрицы AINV
+       write(*,'(A)') 'Inverse Matrix A_inv:'
+       do i = 1, N
+          write(*,'(5F12.4)') (AINV(i,j), j=1,N)
+       end do
+  
+       ! Вычисляем R = A*A_inv - I
+       do i = 1, N
+          do j = 1, N
+             R(i,j) = 0.0
+             do k = 1, N
+                R(i,j) = R(i,j) + A(i,k) * AINV(k,j)
+             end do
+             if (i == j) then
+                R(i,j) = R(i,j) - 1.0
+             end if
+          end do
+       end do
+  
+       ! Печать матрицы R
+       write(*,'(A)') 'Matrix R = A*A_inv - I:'
+       do i = 1, N
+          write(*,'(5F12.4)') (R(i,j), j=1,N)
+       end do
+  
+       ! Норма матрицы R
+       normR = 0.0
+       do i = 1, N
+          rowSum = 0.0
+          do j = 1, N
+             rowSum = rowSum + abs(R(i,j))
+          end do
+          if (rowSum > normR) then
+             normR = rowSum
+          end if
+       end do
+  
+       write(*,'(A, F12.6)') 'Norm of R: ', normR
+       write(*,'(A)') '---------------------------------------------'
+  
     end do
-    
-end program main
+  
+  end program FormAndInvert
+  
+  subroutine DECOMP(NDIM, N, A, COND, IPVT, WORK)
+    implicit none
+    integer, intent(in) :: NDIM, N
+    real, intent(inout) :: A(NDIM, N)
+    real, intent(out) :: COND
+    integer, intent(out) :: IPVT(N)
+    real, intent(inout) :: WORK(N)
+    real :: EK, T, ANORM, YNORM, ZNORM
+    integer :: NM1, I, J, K, KP1, KB, M
+  
+    IPVT(N) = 1
+    if (N == 1) then
+       COND = 1.0
+       if (A(1,1) /= 0.0) return
+       COND = 1.0e+32
+       return
+    end if
+  
+    NM1 = N - 1
+    ANORM = 0.0
+    do J = 1, N
+       T = 0.0
+       do I = 1, N
+          T = T + abs(A(I,J))
+       end do
+       if (T > ANORM) then
+          ANORM = T
+       end if
+    end do
+  
+    do K = 1, NM1
+       KP1 = K + 1
+       M = K
+       do I = KP1, N
+          if (abs(A(I,K)) > abs(A(M,K))) then
+             M = I
+          end if
+       end do
+       IPVT(K) = M
+       if (M /= K) then
+          IPVT(N) = -IPVT(N)
+       end if
+       T = A(M,K)
+       A(M,K) = A(K,K)
+       A(K,K) = T
+       if (T == 0.0) cycle
+       do I = KP1, N
+          A(I,K) = -A(I,K) / T
+       end do
+       do J = KP1, N
+          T = A(M,J)
+          A(M,J) = A(K,J)
+          A(K,J) = T
+          if (T == 0.0) cycle
+          do I = KP1, N
+             A(I,J) = A(I,J) + A(I,K) * T
+          end do
+       end do
+    end do
+  
+    do K = 1, N
+       T = 0.0
+       if (K /= 1) then
+          do I = 1, K-1
+             T = T + A(I,K) * WORK(I)
+          end do
+       end if
+       EK = 1.0
+       if (T < 0.0) EK = -1.0
+       if (A(K,K) == 0.0) then
+          COND = 1.0e+32
+          return
+       end if
+       WORK(K) = -(EK + T) / A(K,K)
+    end do
+  
+    do KB = 1, NM1
+       K = N - KB
+       T = WORK(K)
+       do I = K+1, N
+          T = T + A(I,K) * WORK(I)
+       end do
+       WORK(K) = T
+       if (IPVT(K) /= K) then
+          T = WORK(IPVT(K))
+          WORK(IPVT(K)) = WORK(K)
+          WORK(K) = T
+       end if
+    end do
+  
+    YNORM = 0.0
+    do I = 1, N
+       YNORM = YNORM + abs(WORK(I))
+    end do
+    call SOLVE(NDIM, N, A, WORK, IPVT)
+    ZNORM = 0.0
+    do I = 1, N
+       ZNORM = ZNORM + abs(WORK(I))
+    end do
+    COND = ANORM * ZNORM / YNORM
+    if (COND < 1.0) then
+       COND = 1.0
+    end if
+    return
+  end subroutine DECOMP
+  
+  subroutine SOLVE(NDIM, N, A, B, IPVT)
+    implicit none
+    integer, intent(in) :: NDIM, N
+    integer, intent(in) :: IPVT(N)
+    real, intent(inout) :: A(NDIM, N)
+    real, intent(inout) :: B(N)
+    integer :: KB, NM1, KP1, I, K, M
+    real :: T
+  
+    if (N == 1) then
+       B(1) = B(1) / A(1,1)
+       return
+    end if
+  
+    NM1 = N - 1
+    do K = 1, NM1
+       KP1 = K + 1
+       M = IPVT(K)
+       T = B(M)
+       B(M) = B(K)
+       B(K) = T
+       do I = KP1, N
+          B(I) = B(I) + A(I,K) * T
+       end do
+    end do
+  
+    do KB = 1, NM1
+       K = N - KB + 1
+       B(K) = B(K) / A(K,K)
+       T = -B(K)
+       do I = 1, K-1
+          B(I) = B(I) + A(I,K) * T
+       end do
+    end do
+    B(1) = B(1) / A(1,1)
+    return
+  end subroutine SOLVE  
 
 \end{lstlisting}
 

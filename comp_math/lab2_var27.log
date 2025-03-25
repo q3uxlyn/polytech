@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.22)  7 MAR 2025 13:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.22)  20 MAR 2025 18:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/Galina/Desktop/personal/polytech/math_1/lab2_var27
-(/Users/Galina/Desktop/personal/polytech/math_1/lab2_var27.tex
+**/Users/Galina/Desktop/personal/polytech/comp_math/lab2_var27
+(/Users/Galina/Desktop/personal/polytech/comp_math/lab2_var27.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
@@ -773,57 +773,57 @@ LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line 2
 File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 )
 LaTeX Font Info:    Font shape `T2A/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T2A/cmtt/m/n' tried instead on input line 249.
- [2]
-<var_1_5.png, id=30, 763.85374pt x 359.3425pt>
+(Font)              Font shape `T2A/cmtt/m/n' tried instead on input line 255.
+ [2] [3] [4] [5]
+<var_1_5.png, id=39, 584.1825pt x 352.31625pt>
 File: var_1_5.png Graphic file (type png)
 <use var_1_5.png>
-Package pdftex.def Info: var_1_5.png  used on input line 319.
-(pdftex.def)             Requested size: 483.69684pt x 227.54938pt.
+Package pdftex.def Info: var_1_5.png  used on input line 502.
+(pdftex.def)             Requested size: 483.69684pt x 291.72354pt.
 
-Overfull \hbox (34.22147pt too wide) in paragraph at lines 319--320
+Overfull \hbox (34.22147pt too wide) in paragraph at lines 502--503
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 319--320
+Underfull \hbox (badness 10000) in paragraph at lines 502--503
 
  []
 
-[3]
-<var_1_0.png, id=35, 734.745pt x 360.34625pt>
+[6]
+<var_1_0.png, id=44, 570.13pt x 348.30125pt>
 File: var_1_0.png Graphic file (type png)
 <use var_1_0.png>
-Package pdftex.def Info: var_1_0.png  used on input line 321.
-(pdftex.def)             Requested size: 483.69684pt x 237.22992pt.
+Package pdftex.def Info: var_1_0.png  used on input line 504.
+(pdftex.def)             Requested size: 483.69684pt x 295.49942pt.
 
-Overfull \hbox (34.22147pt too wide) in paragraph at lines 321--322
+Overfull \hbox (34.22147pt too wide) in paragraph at lines 504--505
 [][] 
  []
 
-<var_1_001.png, id=36, 748.7975pt x 362.35374pt>
+<var_1_001.png, id=45, 573.14125pt x 355.3275pt>
 File: var_1_001.png Graphic file (type png)
 <use var_1_001.png>
-Package pdftex.def Info: var_1_001.png  used on input line 323.
-(pdftex.def)             Requested size: 483.69684pt x 234.06746pt.
+Package pdftex.def Info: var_1_001.png  used on input line 506.
+(pdftex.def)             Requested size: 483.69684pt x 299.88274pt.
 
-Overfull \hbox (34.22147pt too wide) in paragraph at lines 323--324
+Overfull \hbox (34.22147pt too wide) in paragraph at lines 506--507
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 323--324
+Underfull \hbox (badness 10000) in paragraph at lines 506--507
 
  []
 
-[4 <./var_1_5.png> <./var_1_0.png>]
-<var_1_0001.png, id=42, 745.78625pt x 358.33875pt>
+[7 <./var_1_5.png> <./var_1_0.png>]
+<var_1_0001.png, id=52, 576.1525pt x 350.30875pt>
 File: var_1_0001.png Graphic file (type png)
 <use var_1_0001.png>
-Package pdftex.def Info: var_1_0001.png  used on input line 325.
-(pdftex.def)             Requested size: 483.69684pt x 232.40892pt.
+Package pdftex.def Info: var_1_0001.png  used on input line 508.
+(pdftex.def)             Requested size: 483.69684pt x 294.10767pt.
 
-Overfull \hbox (34.22147pt too wide) in paragraph at lines 325--326
+Overfull \hbox (34.22147pt too wide) in paragraph at lines 508--509
 [][] 
  []
 
@@ -831,25 +831,25 @@ Overfull \hbox (34.22147pt too wide) in paragraph at lines 325--326
 Package caption Warning: Unused \captionsetup[table] on input line 139.
 See the caption package documentation for explanation.
 
-[5 <./var_1_001.png> <./var_1_0001.png>] (./lab2_var27.aux<<t1.cmap>>)
+[8 <./var_1_001.png> <./var_1_0001.png>] (./lab2_var27.aux<<t1.cmap>>)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20437 strings out of 474116
- 392413 string characters out of 5743682
- 2304187 words of memory out of 5000000
- 42459 multiletter control sequences out of 15000+600000
+ 20455 strings out of 474116
+ 392588 string characters out of 5743682
+ 2285187 words of memory out of 5000000
+ 42477 multiletter control sequences out of 15000+600000
  566064 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,7n,87p,434b,2136s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,7n,87p,437b,2136s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0500.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfxc2074.pfb>
-Output written on lab2_var27.pdf (5 pages, 314399 bytes).
+Output written on lab2_var27.pdf (8 pages, 471875 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
- 56 compressed objects within 1 object stream
+ 104 PDF objects out of 1000 (max. 8388607)
+ 64 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  57 words of extra memory for PDF output out of 10000 (max. 10000000)
 
