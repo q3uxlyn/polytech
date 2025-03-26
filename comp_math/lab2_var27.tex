@@ -287,7 +287,7 @@ $$
        write(*,'(A, F10.6)') 'For var = ', a4
        write(*,'(A)') 'Matrix A:'
        do i = 1, N
-          write(*,'(5F12.4)') (A(i,j), j=1,N)
+          write(*,'(5ES10.2)') (A(i,j), j=1,N)
        end do
   
        call DECOMP(N, N, A_copy, cond, ipvt, work)
@@ -310,7 +310,7 @@ $$
        ! Печать обратной матрицы AINV
        write(*,'(A)') 'Inverse Matrix A_inv:'
        do i = 1, N
-          write(*,'(5F12.4)') (AINV(i,j), j=1,N)
+          write(*,'(5ES10.2)') (AINV(i,j), j=1,N)
        end do
   
        ! Вычисляем R = A*A_inv - I
@@ -329,7 +329,7 @@ $$
        ! Печать матрицы R
        write(*,'(A)') 'Matrix R = A*A_inv - I:'
        do i = 1, N
-          write(*,'(5F12.4)') (R(i,j), j=1,N)
+          write(*,'(5ES10.2)') (R(i,j), j=1,N)
        end do
   
        ! Норма матрицы R
@@ -344,7 +344,7 @@ $$
           end if
        end do
   
-       write(*,'(A, F12.6)') 'Norm of R: ', normR
+       write(*,'(A, ES10.2)') 'Norm of R: ', normR
        write(*,'(A)') '---------------------------------------------'
   
     end do
@@ -501,7 +501,7 @@ $$
 
 \includegraphics[width=170mm]{var_1_5.png}\\
 
-\includegraphics[width=170mm]{var_1_0.png}
+\includegraphics[width=170mm]{var_1_01.png}
 
 \includegraphics[width=170mm]{var_1_001.png}\\
 
